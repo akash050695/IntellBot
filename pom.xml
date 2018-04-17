@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>IntellBot</groupId>
+	<artifactId>IntellBot</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<properties>
+		<messenger.4j.version>0.8.0</messenger.4j.version>
+		<api.ai.version>1.4.8</api.ai.version>
+	</properties>
+	<dependencies>
+
+		<dependency>
+			<groupId>com.github.messenger4j</groupId>
+			<artifactId>messenger4j</artifactId>
+			<version>${messenger.4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ai.api</groupId>
+			<artifactId>libai</artifactId>
+			<version>${api.ai.version}</version>
+		</dependency>
+
+	</dependencies>
+</project>
