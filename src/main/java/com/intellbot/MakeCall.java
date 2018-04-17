@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 
 import ai.api.AIConfiguration;
 import ai.api.AIDataService;
+import ai.api.AIServiceException;
 import ai.api.model.AIRequest;
 import ai.api.model.AIResponse;
 
@@ -17,22 +18,22 @@ public class MakeCall {
 		AIDataService dataService = new AIDataService(configuration);
 
 		String line = arg;
-		String responseString ="Sorry couldn't reach our service";
+		String responseString = "Sorry couldn't reach our service";
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+			AIRequest request = new AIRequest(line);
+
+			AIResponse response = null;
 			try {
-				AIRequest request = new AIRequest(line);
-
-				AIResponse response = dataService.request(request);
-
-				if (response.getStatus().getCode() == 200) {
-					responseString = response.getResult().getFulfillment().getSpeech();
-				} else {
-					responseString = response.getStatus().getErrorDetails();
-				}
-			} catch (Exception ex) {
-				ex.printStackTrace();
+				response = dataService.request(request);
+			} catch (AIServiceException e) {
+				e.printStackTrace();
 			}
 
+			if (response.getStatus().getCode() == 200) {
+				responseString = response.getResult().getFulfillment().getSpeech();
+			} else {
+				responseString = response.getStatus().getErrorDetails();
+			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
